@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IdentityConnection-Web.config Connection String" description="IdentityConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=tcp:cheretadbserver.database.windows.net,1433;Initial Catalog=CheretaDb;User ID=adminchereta;Password=chereta@2018;MultipleActiveResultSets=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Natnael\ Zeleke\\Desktop\\projects\\AddisBid\\Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='IdentityConnection']/@connectionString" />
+  </parameter>
+  <parameter name="AddisBidContext-Web.config Connection String" description="AddisBidContext Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Infrastructure.AddisBidContext.csdl|res://*/Infrastructure.AddisBidContext.ssdl|res://*/Infrastructure.AddisBidContext.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=tcp:cheretadbserver.database.windows.net,1433;Initial Catalog=CheretaDb;User ID=adminchereta;Password=chereta@2018;integrated security=False;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Natnael\ Zeleke\\Desktop\\projects\\AddisBid\\Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AddisBidContext']/@connectionString" />
+  </parameter>
+</parameters>

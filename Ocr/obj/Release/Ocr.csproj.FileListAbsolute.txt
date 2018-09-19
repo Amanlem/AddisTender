@@ -1,0 +1,11 @@
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\x64\liblept172.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\x64\libtesseract304.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\x86\liblept172.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\x86\libtesseract304.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\Ocr.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\Ocr.pdb
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\Tesseract.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\bin\Release\Tesseract.xml
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\obj\Release\Ocr.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\obj\Release\Ocr.pdb
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Ocr\obj\Release\Ocr.csprojResolveAssemblyReference.cache

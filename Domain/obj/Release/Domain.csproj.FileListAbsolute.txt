@@ -1,0 +1,12 @@
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\Domain.dll.config
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\Domain.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\Domain.pdb
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\EntityFramework.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\EntityFramework.xml
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\obj\Release\Domain.csprojResolveAssemblyReference.cache
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\obj\Release\Domain.PrivateSettings.resources
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\obj\Release\Domain.csproj.GenerateResource.Cache
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\obj\Release\Domain.dll
+C:\Users\Natnael Zeleke\Desktop\projects\AddisBid\Domain\obj\Release\Domain.pdb

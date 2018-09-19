@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AddisBidDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="RegisteredOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AccountExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TenderTypeIdForEmail" Type="Int64" />
+    <NavigationProperty Name="TenderType" Relationship="Self.FK_Account_TenderType" FromRole="Account" ToRole="TenderType" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Profile_Users" FromRole="Account" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="NewsPaper">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NameAmharic" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Tenders" Relationship="Self.FK_Tender_NewsPaper" FromRole="NewsPaper" ToRole="Tender" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.UserRoles" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenderTypeId" Type="Int64" Nullable="false" />
+    <Property Name="OpeningDay" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PostedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TenderTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClosingDay" Type="DateTime" Precision="3" />
+    <Property Name="NewsPaperId" Type="Int64" Nullable="false" />
+    <Property Name="NewsPaperPublishDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="NewsPaper" Relationship="Self.FK_Tender_NewsPaper" FromRole="Tender" ToRole="NewsPaper" />
+    <NavigationProperty Name="TenderType" Relationship="Self.FK_Tender_TenderType" FromRole="Tender" ToRole="TenderType" />
+    <NavigationProperty Name="UserSavedTenders" Relationship="Self.FK_UserSavedTender_Tender" FromRole="Tender" ToRole="UserSavedTender" />
+  </EntityType>
+  <EntityType Name="TenderType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NameAmharic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_TenderType" FromRole="TenderType" ToRole="Account" />
+    <NavigationProperty Name="Tenders" Relationship="Self.FK_Tender_TenderType" FromRole="TenderType" ToRole="Tender" />
+  </EntityType>
+  <EntityType Name="UserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserClaims_dbo_Users_UserId" FromRole="UserClaims" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_UserLogins_dbo_Users_UserId" FromRole="UserLogins" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CanNavigate" Type="Boolean" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Profile_Users" FromRole="Users" ToRole="Account" />
+    <NavigationProperty Name="UserClaims" Relationship="Self.FK_dbo_UserClaims_dbo_Users_UserId" FromRole="Users" ToRole="UserClaims" />
+    <NavigationProperty Name="UserLogins" Relationship="Self.FK_dbo_UserLogins_dbo_Users_UserId" FromRole="Users" ToRole="UserLogins" />
+    <NavigationProperty Name="UserSavedTenders" Relationship="Self.FK_UserSavedTender_Users" FromRole="Users" ToRole="UserSavedTender" />
+    <NavigationProperty Name="UsersBySales" Relationship="Self.FK_UsersBySales_Users" FromRole="Users" ToRole="UsersBySales" />
+    <NavigationProperty Name="UserTenderTypeChoice" Relationship="Self.FK_UserTenderPreference_Users" FromRole="Users" ToRole="UserTenderTypeChoice" />
+    <NavigationProperty Name="Roles" Relationship="Self.UserRoles" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <EntityType Name="UserSavedTender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="TenderId" Type="Int64" Nullable="false" />
+    <Property Name="SavedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Tender" Relationship="Self.FK_UserSavedTender_Tender" FromRole="UserSavedTender" ToRole="Tender" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserSavedTender_Users" FromRole="UserSavedTender" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UsersBySale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UsersBySales_Users" FromRole="UsersBySales" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="UserTenderTypeChoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="TenderTypeIds" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserTenderPreference_Users" FromRole="UserTenderTypeChoice" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_Account_TenderType">
+    <End Role="TenderType" Type="Self.TenderType" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TenderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="TenderTypeIdForEmail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tender_NewsPaper">
+    <End Role="NewsPaper" Type="Self.NewsPaper" Multiplicity="1" />
+    <End Role="Tender" Type="Self.Tender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsPaper">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tender">
+        <PropertyRef Name="NewsPaperId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tender_TenderType">
+    <End Role="TenderType" Type="Self.TenderType" Multiplicity="1" />
+    <End Role="Tender" Type="Self.Tender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TenderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tender">
+        <PropertyRef Name="TenderTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSavedTender_Tender">
+    <End Role="Tender" Type="Self.Tender" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserSavedTender" Type="Self.UserSavedTender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserSavedTender">
+        <PropertyRef Name="TenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserClaims_dbo_Users_UserId">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserClaims" Type="Self.UserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserLogins_dbo_Users_UserId">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserLogins" Type="Self.UserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSavedTender_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserSavedTender" Type="Self.UserSavedTender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserSavedTender">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsersBySales_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UsersBySales" Type="Self.UsersBySale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UsersBySales">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTenderPreference_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserTenderTypeChoice" Type="Self.UserTenderTypeChoice" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserTenderTypeChoice">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserRoles">
+    <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="AddisBidContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="NewsPapers" EntityType="Self.NewsPaper" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tenders" EntityType="Self.Tender" />
+    <EntitySet Name="TenderTypes" EntityType="Self.TenderType" />
+    <EntitySet Name="UserClaims" EntityType="Self.UserClaim" />
+    <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserSavedTenders" EntityType="Self.UserSavedTender" />
+    <EntitySet Name="UsersBySales" EntityType="Self.UsersBySale" />
+    <EntitySet Name="UserTenderTypeChoices" EntityType="Self.UserTenderTypeChoice" />
+    <AssociationSet Name="FK_Account_TenderType" Association="Self.FK_Account_TenderType">
+      <End Role="TenderType" EntitySet="TenderTypes" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_Users" Association="Self.FK_Profile_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tender_NewsPaper" Association="Self.FK_Tender_NewsPaper">
+      <End Role="NewsPaper" EntitySet="NewsPapers" />
+      <End Role="Tender" EntitySet="Tenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tender_TenderType" Association="Self.FK_Tender_TenderType">
+      <End Role="TenderType" EntitySet="TenderTypes" />
+      <End Role="Tender" EntitySet="Tenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSavedTender_Tender" Association="Self.FK_UserSavedTender_Tender">
+      <End Role="Tender" EntitySet="Tenders" />
+      <End Role="UserSavedTender" EntitySet="UserSavedTenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserClaims_dbo_Users_UserId" Association="Self.FK_dbo_UserClaims_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserClaims" EntitySet="UserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserLogins_dbo_Users_UserId" Association="Self.FK_dbo_UserLogins_dbo_Users_UserId">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserLogins" EntitySet="UserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSavedTender_Users" Association="Self.FK_UserSavedTender_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserSavedTender" EntitySet="UserSavedTenders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsersBySales_Users" Association="Self.FK_UsersBySales_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UsersBySales" EntitySet="UsersBySales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTenderPreference_Users" Association="Self.FK_UserTenderPreference_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserTenderTypeChoice" EntitySet="UserTenderTypeChoices" />
+    </AssociationSet>
+    <AssociationSet Name="UserRoles" Association="Self.UserRoles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
